@@ -4,13 +4,16 @@ credentials:
     - credentials:
       - usernamePassword:
           id: "server_login"
-          password: "{AQAAABAAAABAr4hRnQHtHpycyd5GppBUX5PGdnqkFw4bDBHRUXA31Z9nnmNmf7tLM0ciMO0byFie85D2n5pntQ6bVESr4fpJMzwk7tJDuFWlQQ8jHK7zt24=}"
+          password: "{AQAAABAAAAAQNQnCCgAHfmwLgCpC0f88T9yrsl8caDft61rqzd8UK+Q=}"
           scope: GLOBAL
           username: "jenkins_admin"
 jenkins:
   agentProtocols:
   - "JNLP4-connect"
   - "Ping"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
   crumbIssuer:
     standard:
       excludeClientIPFromCrumb: false
@@ -56,6 +59,24 @@ jenkins:
   remotingSecurity:
     enabled: false
   scmCheckoutRetryCount: 0
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "jenkins_admin"
+        name: "Jenki"
+        properties:
+        - "apiToken"
+        - favoriting:
+            autofavoriteEnabled: true
+        - "favorite"
+        - "myView"
+        - preferredProvider:
+            providerId: "default"
+        - "timezone"
+        - mailer:
+            emailAddress: "jenkins@admin.se"
   slaveAgentPort: 50000
   updateCenter:
     sites:
@@ -136,6 +157,7 @@ unclassified:
       credentialsConfig:
         ignoreCredentialPluginDisabled: true
         overridingCredentials: false
+        password: "{AQAAABAAAAAQoMd1AUBpAfSvQOYUF6gJomW8UCRwg7eSmc1KUvxCxhk=}"
         username: "****"
       timeout: 300
     useCredentialsPlugin: false
@@ -215,13 +237,13 @@ unclassified:
     adminAddress: "danijelhir@hotmail.com"
     url: "http://3.120.226.57:8080/"
   logstashConfiguration:
-    enableGlobally: false
+    enableGlobally: true
     enabled: true
     logstashIndexer:
       elasticSearch:
         mimeType: "application/json"
         password: "{AQAAABAAAABA9tQSYXSZfAmj0pkAiuhywJJATGNATjCukfejuahMXn4RJPdUi7IU1AjpOfdafOArJu5f/Jg5oTyH0m8Y4y9cbGZU8VOCAnJa8QrQBUlGTSQ=}"
-        uri: "http://localhost:9200/jenkins_logs/_doc"
+        uri: "http://172.17.0.1:9200/jenkins_logs/_doc"
     milliSecondTimestamps: true
   mailer:
     charset: "UTF-8"
